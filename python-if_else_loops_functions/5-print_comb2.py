@@ -1,4 +1,6 @@
 #!/usr/bin/python3
-numbers = [str(i).zfill(2) for i in range(0, 100)]
-result = ', '.join(numbers)
-print(result)
+for i in range(0, 100):
+    if i != 99:
+        print('{0:02d}, '.format(i), end='')
+    else:
+        print('{0:02d}'.format(i))
