@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 def safe_print_list(my_list=[], x=0):
+    m = 0
     try:
-        print(''.join(str(my_list[i] for i in range(x))))
-    except IndexError:
-        pass
+        for i in range(x):
+            print('{}'.format(my_list[i]), end='')
+            m += 1
+    except Exception:
+        print('', end='')
     finally:
         print('')
-    return min(x, len(my_list))
+    return m
