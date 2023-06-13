@@ -4,11 +4,8 @@
 
 class Square:
     '''square class'''
-
-
     def __init__(self, size=0):
         self.set_size(size)
-
 
     def set_size(self, size):
         if not (type(size) == int):
