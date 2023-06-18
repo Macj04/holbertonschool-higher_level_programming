@@ -1,0 +1,32 @@
+>>> text_indentation = __import__('0-text_indentation').text_indentation
+
+>>> text = "Hello? How are you: Good. And you?"
+>>> text_indentation(text)
+Hello?
+
+How are you:
+
+Good.
+
+And you?
+
+>>> text = "This is a test."
+>>> text_indentation(text)
+This is a test.
+
+
+>>> text = "No indentation"
+>>> text_indentation(text)
+No indentation
+
+
+>>> text = ""
+>>> text_indentation(text)
+(empty output)
+
+
+>>> text = 123
+>>> text_indentation(text)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
