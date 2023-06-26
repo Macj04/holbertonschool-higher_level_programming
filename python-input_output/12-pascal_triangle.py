@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-''' pascal trinangle '''
+''' trinangle '''
 
 
 def pascal_triangle(n):
     ''' funtion '''
-    triangle = []
+    row = []
     for i in range(n):
-        power = 11 ** i
-        string_power = str(power)
-        triangle.append(string_power)
-    return triangle
+        x = 11**i
+        str_x = str(x)
+        row.append(str_x)
+    return row
