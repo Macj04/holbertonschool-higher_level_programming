@@ -1,88 +1,104 @@
 #!/usr/bin/python3
-'''Class Rectangle that inherits from Base'''
+''' Write the class Rectangle that inherits from Base  '''
+
+
 from models.base import Base
 
 
 class Rectangle(Base):
+    ''' class  '''
     def __init__(self, width, height, x=0, y=0, id=None):
         super().__init__(id)
-        self._width = self._validate_positive_integer(width, "width")
-        self._height = self._validate_positive_integer(height, "height")
-        self._x = self._validate_non_negative_integer(x, "x")
-        self._y = self._validate_non_negative_integer(y, "y")
+        self.__width = self.__height = self.__x = self.__y = 0
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
     @property
     def width(self):
-        return self._width
+        return self.__width
 
     @width.setter
     def width(self, value):
-        self._width = self._validate_positive_integer(value, "width")
+        if type(value) is not int:
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
+        self.__width = value
 
     @property
     def height(self):
-        return self._height
+        return self.__height
 
     @height.setter
     def height(self, value):
-        self._height = self._validate_positive_integer(value, "height")
+        if type(value) is not int:
+            raise TypeError("height must be an integer")
+        if value <= 0:
+            raise ValueError("height must be > 0")
+        self.__height = value
 
     @property
     def x(self):
-        return self._x
+        return self.__x
 
     @x.setter
     def x(self, value):
-        self._x = self._validate_non_negative_integer(value, "x")
+        if type(value) is not int:
+            raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
+        self.__x = value
 
     @property
     def y(self):
-        return self._y
+        return self.__y
 
     @y.setter
     def y(self, value):
-        self._y = self._validate_non_negative_integer(value, "y")
+        if type(value) is not int:
+            raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
+        self.__y = value
 
     def area(self):
-        return self._width * self._height
+        ''' area of rectangle  '''
+        return self.__height * self.__width
 
     def display(self):
-        for _ in range(self._y):
-            print()
-        for _ in range(self._height):
-            print(" " * self._x + "#" * self._width)
+        ''' print a rectangle '''
+        for _ in range(self.__y):
+            print('')
+        for _ in range(self.__height):
+            for _ in range(self.__x):
+                print(' ', end='')
+            for _ in range(self.__width):
+                print('#', end='')
+            print('')
 
     def __str__(self):
-        return f"[Rectangle] ({self.id}) {self._x}/{self._y} - {self._width}/{self._height}"
+        return f'[Rectangle] ({self.id}) {self.__x}/{self.__y} - {self.__width}/{self.__height}'
 
     def update(self, *args, **kwargs):
+        '''Update the Rectangle'''
         if args:
-            attrs = ["id", "width", "height", "x", "y"]
-            for attr, value in zip(attrs, args):
-                setattr(self, attr, value)
+            attributes = ['id', 'width', 'height', 'x', 'y']
+            for i, arg in enumerate(args):
+                if i < len(attributes):
+                    setattr(self, attributes[i], arg)
         else:
-            for attr, value in kwargs.items():
-                setattr(self, attr, value)
+            for key, value in kwargs.items():
+                if key in ['id', 'width', 'height', 'x', 'y']:
+                    setattr(self, key, value)
 
     def to_dictionary(self):
+        ''' to dict '''
         return {
-            "id": self.id,
-            "width": self._width,
-            "height": self._height,
-            "x": self._x,
-            "y": self._y,
+            'id': self.id,
+            'width': self.__width,
+            'height': self.__height,
+            'x': self.__x,
+            'y': self.__y
         }
-
-    def _validate_positive_integer(self, value, attribute):
-        if not isinstance(value, int):
-            raise TypeError(f"{attribute} must be an integer")
-        if value <= 0:
-            raise ValueError(f"{attribute} must be > 0")
-        return value
-
-    def _validate_non_negative_integer(self, value, attribute):
-        if not isinstance(value, int):
-            raise TypeError(f"{attribute} must be an integer")
-        if value < 0:
-            raise ValueError(f"{attribute} must be >= 0")
-        return value
